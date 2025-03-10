@@ -135,12 +135,12 @@ const ChooseProduct = () => {
               <div className="w-full flex flex-col p-3 justify-between ">
                 <div className="w-full flex gap-2 justify-between ">
                   <div>{productBase?.name}</div>
-                  <div>&euro;{price}</div>
+                  <div>{price}</div>
                 </div>
 
               </div>
             </div>
-            <> {showMessage && <div className="z-50 text-red-500 w-full text-sm bg-slate-100 rounded-lg p-3">Wähle dein Flavour</div>}</>
+            <> {showMessage && <div className="z-50 text-red-500 w-full text-sm bg-slate-100 rounded-lg p-3"></div>}</>
             <div className="flex flex-col  flex-wrap ">
               {productBase?.flavors&&productAddOn.map((product, i) => {
                 return (
@@ -175,21 +175,21 @@ const ChooseProduct = () => {
                 );
               })}
             </div> */}
-            <div className="w-full   bg-white flex flex-row border  rounded-bl-2xl rounded-br-2xl">
+            <div className="w-full    flex flex-row border  rounded-bl-2xl rounded-br-2xl">
               <div className="flex items-center p-1 justify-center  rounded-lg gap-2 fit">
                 <div>
                 {quantity > 1?  <button onClick={()=>{setQuantity((quantity)=>quantity-1)}} className='border px-3 py-3 rounded-full bg-blue-500'><IoMdRemove size={20} className="text-white " /></button>:<></> }
-                {quantity < 2?  <button  className='border px-3 py-3 rounded-full bg-blue-300'><IoMdRemove size={20} className="text-white " /></button>:<></> }
+                {quantity < 2?  <button  className='border px-3 py-3 rounded-full primary'><IoMdRemove size={20} className="text-white " /></button>:<></> }
                 </div>
               
                 {quantity}
                 <div>
                   {VariantType?.name &&  <button onClick={()=>{setQuantity((quantity)=>quantity+1)}} className='border px-3 py-3 rounded-full bg-blue-500'><IoMdAdd size={20} className="text-white "  /></button> }
                   {!VariantType?.name && <button 
-                      onClick={()=>{setShowMessage(true)}} className='border px-3 py-3 rounded-full bg-blue-300'><IoMdAdd size={20} className="text-white "  /></button>}
+                      onClick={()=>{setShowMessage(true)}} className='border px-3 py-3 rounded-full primary'><IoMdAdd size={20} className="text-white "  /></button>}
                   </div>
 
-                <button className="px-2 py-1 bg-slate-200 rounded-md w-fit" onClick={()=>{addToCartL()}}>Hinzufügen</button>
+                <button className="px-2 py-1 bg-slate-200 rounded-md w-fit" onClick={()=>{addToCartL()}}>Add Service</button>
                
               </div>
             </div>
