@@ -1,4 +1,4 @@
-import cat from '@/app/admin/categories-/components/Cat'
+//import cat from '@/app/admin/categories-/components/Cat'
 import Link from 'next/link'
 import React from 'react'
 

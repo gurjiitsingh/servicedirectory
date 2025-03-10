@@ -34,10 +34,10 @@ const AddForm = () => {
         } 
     }  
     
-     if(session?.user?.id !== undefined){
-      const idUser: string = session?.user?.id;
-      getUserDataById(idUser)
-    }  
+    //  if(session?.user?.id !== undefined){
+    //   const idUser: string = session?.user?.id;
+    //   getUserDataById(idUser)
+    // }  
     },[])//session
 
 
@@ -53,7 +53,7 @@ const AddForm = () => {
     resolver: zodResolver(addressSchimaCheckout),
   });
 
-  setValue("userId", session?.user?.id);
+  // setValue("userId", session?.user?.id);
 
   async function onSubmit(data: TaddressSchemaCheckout) {
   console.log("onsubmit -------------",data)

@@ -57,7 +57,7 @@ console.log("---------", data)
     formData.append("desc", data.desc);
     formData.append("image", data.image[0]);
    // formData.append("oldImgageUrl", data.oldImgageUrl!);
-    formData.append("isFeatured",false)
+    formData.append("isFeatured","")
     formData.append("id", data.id!);
 
     const result = await editCategory(formData);

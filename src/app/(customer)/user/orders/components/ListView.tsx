@@ -35,11 +35,11 @@ const ListView = ({ title }: productTableProps) => {
  async function fetchOrder(){
       
       try {
-        if(session?.user?.id !== undefined){
-        const idUser: string = session?.user?.id;
-        const result = await fetchOrdersMasterByUserId(idUser);
-        setOrderData(result)
-        }
+        // if(session?.user?.id !== undefined){
+        // const idUser: string = session?.user?.id;
+        // const result = await fetchOrdersMasterByUserId(idUser);
+        // setOrderData(result)
+        // }
       } catch (error) {
         console.log(error)
       }

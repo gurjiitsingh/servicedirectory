@@ -45,9 +45,9 @@ const Address = () => {
     if (emailQueryString !== undefined) {
       getAddressByEmail(emailQueryString);
     }
-    if (session?.user?.id !== undefined) {
-      getAddressByID();
-    }
+    // if (session?.user?.id !== undefined) {
+    //   getAddressByID();
+    // }
     setValue("email", emailQueryString);
    // console.log("this is befor email set---------------4",emailQueryString)
   }, [session, emailQueryString]);
@@ -117,7 +117,7 @@ if(deliveryType==='pickup' || deliveryDis !== undefined){
     //await addCustomerAddress(formData);
 
     const purchaseData = {
-      userId: session?.user?.id,
+      // userId: session?.user?.id,
       cartData,
       total:endTotalG,
       totalDiscountG,
@@ -144,7 +144,7 @@ if(deliveryType==='pickup' || deliveryDis !== undefined){
   }
 
   useEffect(()=>{
-    setValue("userId", session?.user?.id); 
+    // setValue("userId", session?.user?.id); 
     setValue("password", "123456");
     //setValue("email", "g@mail.com");
     // setValue("firstName", "Gurjit");
@@ -360,9 +360,9 @@ if(deliveryType==='pickup' || deliveryDis !== undefined){
   }
 
   async function getAddressByID() {
-    const custAddressRes =
-      (await searchAddressByUserId(session?.user.id)) || {};
-       setFormAddress(custAddressRes);
+    // const custAddressRes =
+    //   (await searchAddressByUserId(session?.user.id)) || {};
+    //    setFormAddress(custAddressRes);
   }
 
   async function setFormAddress(custAddressRes: addressResT) {
@@ -372,10 +372,10 @@ if(deliveryType==='pickup' || deliveryDis !== undefined){
 
       setAddress(custAddressRes);
     } else {
-      const userResById = await searchUserById(session?.user?.id);
+      const userResById = "jkjk"//await searchUserById(session?.user?.id);
       if (userResById !== undefined) {
      //   setValue("email", userResById.email);
-        console.log("this is befor email set---------------2",userResById.email)
+      //  console.log("this is befor email set---------------2",userResById.email)
         // setValue("firstName", userResById.firstName);
         // setValue("lastName", userResById.lastName);
         // setValue("userId", userResById.userId);

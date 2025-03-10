@@ -11,19 +11,7 @@ import {
 } from "@/app/action/address/dbOperations";
 
 import { useSession } from "next-auth/react";
-// type idT = {userId:string}
-// type addressResT ={
-//   email:string;
-//   firstName:string;
-//   lastName:string;
-//  // userId:string;
-//   mobNo:string;
-//   addressLine1:string;
-//   addressLine2:string;
-//   city:string;
-//   state:string;
-//   zipCode:string;
-// } 
+
 
 const EditForm = () => {
   const { data: session } = useSession();//, status
@@ -48,10 +36,10 @@ const EditForm = () => {
         setValue("zipCode", addressRes.zipCode!);
       } 
   }  
-   if(session?.user?.id !== undefined){
-    const idU: string = session?.user?.id;
-  getUserDataById(idU)
-  }  
+  //  if(session?.user?.id !== undefined){
+  //   const idU: string = session?.user?.id;
+  // getUserDataById(idU)
+  // }  
   },[])//session // give error when put in dependency
 
 

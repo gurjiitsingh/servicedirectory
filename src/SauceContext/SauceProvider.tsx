@@ -5,7 +5,7 @@ import CartContext from "./SauceContext";
 
 //import { productT } from "@/lib/types/productT";
 import { addressT } from "@/lib/types/addressType";
-import { productT, ProductType } from "@/lib/types/productType";
+import {  ProductType } from "@/lib/types/productType";
 
 interface Props {
   children: React.ReactNode;
@@ -112,7 +112,7 @@ console.log("sauce to add -------", newsauce)
           ...newsauce,
           quantity: 1,
         //  purchaseSession: localStorage.getItem("cart_sauce_data_id"),
-          status: "draft",
+       //   status: "draft",
         },
       ]); // if the item is not in the cart, add the item to the cart
     }
@@ -210,8 +210,8 @@ console.log("sauce to add -------", newsauce)
         {
           ...newsauce,
           quantity: 1,
-          purchaseSession: localStorage.getItem("cart_sauce_data_id"),
-          status: "draft",
+       //   purchaseSession: localStorage.getItem("cart_sauce_data_id"),
+        //  status: "draft",
         },
       ]); // if the item is not in the cart, add the item to the cart
     }}

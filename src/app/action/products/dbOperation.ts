@@ -3,6 +3,7 @@ import {
   newPorductSchema,
   editPorductSchema,
   TproductSchema,
+  TnewProductSchema,
   // TnewProductSchema,
   // ShowPorductT,
 } from "@/lib/types/productType";
@@ -245,7 +246,7 @@ export async function editProduct(formData: FormData) {
   }
 }
 
-export async function fetchProducts(): Promise<ProductType[]> {
+export async function fetchProducts(): Promise<TnewProductSchema[]> {
   // const result = await getDocs(collection(db, "product"))
   // let data = [];
   // result.forEach((doc) => {
@@ -255,9 +256,9 @@ export async function fetchProducts(): Promise<ProductType[]> {
 
   const result = await getDocs(collection(db, "product"));
 
-  let data = [] as ProductType[];
+  let data = [] as TnewProductSchema[];
   result.forEach((doc) => {
-    const pData = { id: doc.id, ...doc.data() } as ProductType;
+    const pData = { id: doc.id, ...doc.data() } as TnewProductSchema;
     data.push(pData);
   });
   return data;
@@ -271,7 +272,7 @@ export async function fetchProducts(): Promise<ProductType[]> {
   //   return data;
 }
 
-export async function fetchProductCategoryById(id: string): Promise<TproductSchema> {
+export async function fetchProductCategoryById(id: string): Promise<TproductSchema[]> {
  // console.log("this is sauce action-------------",id)
  const q = query(collection(db, "product"), where("categoryId", "==", id));
    const querySnapshot = await getDocs(q);
@@ -288,14 +289,14 @@ export async function fetchProductCategoryById(id: string): Promise<TproductSche
 }
 
 
-export async function fetchProductById(id: string): Promise<ProductType> {
+export async function fetchProductById(id: string): Promise<TproductSchema[]> {
   // console.log("this is sauce action-------------",id)
-  const q = query(collection(db, "coupon"), where("categoryId", "==", id));
+  const q = query(collection(db, "product"), where("categoryId", "==", id));
     const querySnapshot = await getDocs(q);
   
-    const data = [] as ProductType[];
+    const data = [] as TproductSchema[];
     querySnapshot.forEach((doc) => {
-      const datas = doc.data() as ProductType;
+      const datas = doc.data() as TproductSchema;
       data.push(datas);
     });
     return data;

@@ -3,7 +3,7 @@ import Header from "@/components/Home/Header";
 import { fetchProductById } from "@/app/action/products/dbOperation";
 //import Link from "next/link";
 
-export default async function Home({ params }: { params: { id: string } }) {
+export default async function Home() {
   //const [product, setProduct ] = useState();
 
   //   useEffect(()=>{
@@ -15,8 +15,8 @@ export default async function Home({ params }: { params: { id: string } }) {
 
   //   },[])
 
-  const id = params.id;
-  const product = await fetchProductById(id);
+  // const id = params.id;
+ // const product = await fetchProductById(id);
 
   //console.log("result", product);
 

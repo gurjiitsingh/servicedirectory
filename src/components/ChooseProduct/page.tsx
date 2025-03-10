@@ -23,7 +23,7 @@ const ChooseProduct = () => {
   const [productAddOn, setProductAddon] = useState<ProductType[]>([]);
   const [productBase, setProductBase] = useState<ProductType>();
   const [cartItem, setCartItem] = useState<ProductType | undefined>();
-  const [productSauces, setProductSaces] = useState<ProductType[]>([]);
+  //const [productSauces, setProductSaces] = useState<ProductType[]>([]);
   const [ flavorsProductG, setFlavorsProductG] = useState<flavorsProductGType[]>([])
  // const [sauceList, setSauceList] = useState<ProductType[]>([]);
   const [showMessage, setShowMessage ] = useState<boolean>(false);
@@ -46,8 +46,8 @@ const ChooseProduct = () => {
         //console.log("addon product ---------", baseProduct.flavors);
         const productAddon = await fetchProductByBaseProductId(baseProductId);
         setProductAddon(productAddon);
-        const sauces = await fetchProductSauces();
-        setProductSaces(sauces);
+      //  const sauces = await fetchProductSauces();
+     //   setProductSaces(sauces);
         if(!productBase?.flavors){
           const flavorsProductG = await fetchflavorsProductG();
           setFlavorsProductG(flavorsProductG);
@@ -68,36 +68,36 @@ const ChooseProduct = () => {
 
  
   function itemOrderUpdate() {
-    const priceBase = productBase?.price as string;
-    const priceVariant = VariantType?.price as string;
+    // const priceBase = productBase?.price as string;
+    // const priceVariant = VariantType?.price as string;
   
    
-    const finalPrice = (parseFloat(priceBase).toFixed(2) + parseFloat(priceVariant).toFixed(2)).toString();
+    // const finalPrice = (parseFloat(priceBase).toFixed(2) + parseFloat(priceVariant).toFixed(2)).toString();
    
-    const id = baseProductId + "-" + VariantType?.name;
-    const pdesc = productBase?.productCat as string;
-    const img = productBase?.image as string;
-    const isF = productBase?.isFeatured as boolean;
-    const pName = productBase?.name as string;
-    const pDesc = VariantType?.name as string;
+    // const id = baseProductId + "-" + VariantType?.name;
+    // const pdesc = productBase?.productCat as string;
+    // const img = productBase?.image as string;
+    // const isF = productBase?.isFeatured as boolean;
+    // const pName = productBase?.name as string;
+    // const pDesc = VariantType?.name as string;
 
-    cartProduct = {
-      id: id,
-      baseProductId,
-      productDesc: pDesc,
-      productCat: pdesc,
-      image: img,
-      isFeatured: isF,
-      name: pName,
-      price: finalPrice,
-      purchaseSession: "",
-      quantity: quantity,
-      status: "",
-    } as ProductType;
+    // cartProduct = {
+    //   id: id,
+    //   baseProductId,
+    //   productDesc: pDesc,
+    //   productCat: pdesc,
+    //   image: img,
+    //   isFeatured: isF,
+    //   name: pName,
+    //   price: finalPrice,
+    //   purchaseSession: "",
+    //   quantity: quantity,
+    //   status: "",
+    // } as ProductType;
     //console.log("final cart product ----------", cartProduct)
-    addProductToCart(cartProduct);
-    setVariantType({name:"", price:""});
-    setQuantity(1);
+    // addProductToCart(cartProduct);
+    // setVariantType({name:"", price:""});
+    // setQuantity(1);
     //setCartItem(cartProduct);
   }
 
@@ -151,19 +151,19 @@ const ChooseProduct = () => {
                   />
                 );
               })} 
-              {!productBase?.flavors&&
+              {/* {!productBase?.flavors&&
               
-              flavorsProductG.map((product, i) => {
-                return (
-                  <Productvariant
-                    key={i}
-                    product={product}
-                    addExtra={addExtra}
-                  />
-                );
-              })
+              // flavorsProductG.map((product, i) => {
+              //   return (
+              //     <Productvariant
+              //       key={i}
+              //       product={product}
+              //       addExtra={addExtra}
+              //     />
+              //   );
+              // })
               
-              }
+              } */}
             </div>
           {/*  <div className="w-full flex bg-white font-semibold text-[#222] text-center py-3  px-6">
               Add Sauces

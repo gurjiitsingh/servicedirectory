@@ -1,11 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 //import Description from "./componets/Description";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { editPorductSchema, TeditProductSchema } from "@/lib/types";
+import { editPorductSchema, TeditProductSchema } from "@/lib/types/productType";
 //import { Images } from "lucide-react";
 // import { fetchCategories } from "@/app/action/category/dbOperations";
 //import { fetchbrands } from "@/app/action/brads/dbOperations";
@@ -56,12 +56,12 @@ const PageComp = () => {
       //  console.log("----------------- product data in edit", catData);
      // setCategory(catData);
       setValue("id", id);
-      setValue("name", productData.name);
-      setValue("productDesc", productData.productDesc);
-      setValue("oldImgageUrl", productData.image);
-      setValue("price", productData.price);
-      setValue("productCat", productData.productCat);
-      setValue("isFeatured", productData.isFeatured);
+      setValue("name", productData[0].name);
+      setValue("productDesc", productData[0].productDesc);
+      setValue("oldImgageUrl", productData[0].image);
+      setValue("price", productData[0].price);
+      //setValue("productCat", productData[0].productCat);
+      setValue("isFeatured", productData[0].isFeatured);
     }
 
     prefetch();

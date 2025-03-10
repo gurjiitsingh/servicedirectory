@@ -5,14 +5,14 @@ import PageProductDetailComponent from "./components/PageProductDetailComponent"
 //import Hero from "@/components/Hero";
 //import { ProductType } from "@/lib/types/ProductTypeype";
 import Footer from "@/components/Home/Footer";
-import { ProductType } from "@/lib/types/productType";
+import { ProductType, TnewProductSchema } from "@/lib/types/productType";
 
 //import { TnewProductSchema } from '@/lib/types';
 // import {  TnewProductSchema } from '@/lib/type/productType';
 
 export default function Page() {
   // const products = await fetchProducts();
-  const [products, setProduct] = useState<ProductType[]>([]);
+  const [products, setProduct] = useState<TnewProductSchema[]>([]);
 
   useEffect(() => {
     async function fetchproductData() {

@@ -45,7 +45,7 @@ export const editPorductSchema = z.object({
 
 export type TeditProductSchema = z.infer<typeof editPorductSchema>;
 
-export default productSchema;
+
 
 export type TProduct = {
   product: {

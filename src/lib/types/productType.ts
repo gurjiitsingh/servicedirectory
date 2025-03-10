@@ -24,7 +24,7 @@ export type ProductType = {
   id: string | undefined;
   name: string;
   price: string;
-  
+  quantity:number;
   productDesc: string;
   productCat: string;
   image: string;
@@ -150,3 +150,16 @@ export type TProduct = {
   image: string;
   category: string;
 };
+
+
+ type editProductType = {
+  name: string;
+  price: string;
+  productDesc: string;
+  productCat: string;
+  id?: string | undefined;
+  isFeatured?: boolean | undefined;
+  image?: any;
+  baseProductId?: string | undefined;
+  oldImgageUrl?: string | undefined;
+}

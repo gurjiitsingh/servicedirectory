@@ -138,7 +138,7 @@ export async function addProductDraft(element:ProductType, UserAddedId:string, o
     orderMasterId,
     //purchaseSession: element.purchaseSession,
     userId: UserAddedId,
-    status: element.status,
+   // status: element.status,
   };
  // console.log("UserAddedId in add products ----",  product)
   try {

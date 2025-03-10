@@ -122,7 +122,7 @@ export const CartProvider: React.FC<Props> = ({
           ...newProduct!,
           quantity: newProduct.quantity!,
         //  purchaseSession: localStorage.getItem("cart_product_data_id"),
-          status: "draft",
+        //  status: "draft",
         },
       ]); // if the item is not in the cart, add the item to the cart
     }
@@ -220,8 +220,8 @@ export const CartProvider: React.FC<Props> = ({
         {
           ...newProduct,
           quantity: 1,
-          purchaseSession: localStorage.getItem("cart_product_data_id"),
-          status: "draft",
+        // purchaseSession: localStorage.getItem("cart_product_data_id"),
+        //  status: "draft",
         },
       ]); // if the item is not in the cart, add the item to the cart
     }}

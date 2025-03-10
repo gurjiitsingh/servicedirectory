@@ -3,8 +3,8 @@ import { verifyPassword } from "@/lib/auth";
 import { db } from '@/lib/firebaseConfig';
 import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth from "next-auth/next";
-import { collection, getDocs, limit, query, where } from "@firebase/firestore";
-import { string } from "zod";
+import { collection, getDocs,  query, where } from "@firebase/firestore";
+
 
 // type TProduct = {
 //   product: {
