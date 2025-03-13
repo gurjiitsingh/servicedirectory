@@ -1,10 +1,51 @@
 'use server'
 import { hashPassword } from "@/lib/auth";
 import { db } from "@/lib/firebaseConfig";
-import {  userTypeArr } from "@/lib/types/userType";
+import {  userType, userTypeArr } from "@/lib/types/userType";
 import { TuserSchem } from "@/lib/types";
 import { addDoc, collection, getDocs, query, where } from "@firebase/firestore";
 
+type getuserType = {
+  email:string;
+  password:string;
+}
+
+export async function getUser(email: string,password:string): Promise<getuserType> {
+  console.log(password)
+  const q = query(collection(db, "address"), where("email", "==", email));
+  const querySnapshot = await getDocs(q);
+
+  //let recordId = null;
+  let data = {} as userType;
+  //  const user01 = {} as User;
+  //let i = 0;
+  querySnapshot.forEach((doc) => {
+    // i++;
+    // recordId = doc.id;
+    // doc.data() is never undefined for query doc snapshots
+   // console.log(" address find --", doc.data());
+    data = doc.data() as userType;
+  });
+  return data;
+}
+
+export async function searchUserByEmail(email: string,pass:string): Promise<userType> {
+  const q = query(collection(db, "address"), where("email", "==", email));
+  const querySnapshot = await getDocs(q);
+
+  //let recordId = null;
+  let data = {} as userType;
+  //  const user01 = {} as User;
+  //let i = 0;
+  querySnapshot.forEach((doc) => {
+    // i++;
+    // recordId = doc.id;
+    // doc.data() is never undefined for query doc snapshots
+   // console.log(" address find --", doc.data());
+    data = doc.data() as userType;
+  });
+  return data;
+}
 
 export async function addUserDirect(formData: FormData) {
   const lastName = formData.get("lastName");

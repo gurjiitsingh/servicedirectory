@@ -17,21 +17,50 @@ import {
 } from "@/components/ui/table";
 
 import TableRows from "./TableRows";
-import { fetchProducts } from "@/app/action/productsbase/dbOperation";
 
-import { ProductType } from "@/lib/types/productType";
+
+import {  TproductSchema } from "@/lib/types/productType";
+import { fetchProductCategoryById } from "@/app/action/products/dbOperation";
+import { useSearchParams } from "next/navigation";
+import { categoryType } from "@/lib/types/categoryType";
+import { fetchCategories } from "@/app/action/category/dbOperations";
+import CategoryComp from "./CategoryComp";
+
 //import FeaturProductUpdate from "./FeaturProductUpdate";
 
 const ListView = ({ title }: productTableProps) => {
-  const [productData, setProductData] = useState<ProductType[]>([]);
+
+const useSearch = useSearchParams();
+const id = useSearch.get("id") as string;
+  const [productData, setProductData] = useState<TproductSchema[]>([]);
+  const [categoryData, setCategoryData] = useState<categoryType[]>([]);
+  const [cateId, setCateId ] = useState<string>(id);
   // var pageNo = 1;
   // var limit = 10
 
+  // useEffect(() => {
+   
+  //   async function fetchcate() {
+  //     try {
+      
+  //     const categories = await fetchCategories()
+  //       console.log("---------", categories)
+  //       setCategoryData(categories);
+       
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   fetchcate();
+    
+  // }, []);
+
+ 
   useEffect(() => {
     async function fetchProduct() {
       try {
-        const result = await fetchProducts();
-      //  console.log("---------", result)
+        const result = await fetchProductCategoryById(cateId);
+        console.log("---------", result)
         setProductData(result);
       } catch (error) {
         console.log(error);
@@ -39,15 +68,26 @@ const ListView = ({ title }: productTableProps) => {
     }
     fetchProduct();
     
-  }, []);
-
+  }, [ cateId]);  
+  
+   
+console.log("useSearch id ----", cateId)
  
 
   return (
     <>
       <div className="mt-10 p-2">
+      {/* <h3 className="text-xl mb-4 font-semibold">
+       Select Service
+        </h3>
+        <div className="flex gap-3">
+{categoryData.map((cate)=>{
+  return <CategoryComp name={cate.name} id={cate.id} key={cate.name} />
+})}
+          
+        </div> */}
         <h3 className="text-2xl mb-4 font-semibold">
-          {title ? title : "Services"}
+        Services
         </h3>
         <div className="bg-slate-50 rounded-lg p-1">
           <Table>
@@ -59,7 +99,7 @@ const ListView = ({ title }: productTableProps) => {
                    Name
                 </TableHead>
                 <TableHead className="hidden md:table-cell">
-                   Price
+                   Sr. No.
                 </TableHead>
                
 
@@ -71,7 +111,7 @@ const ListView = ({ title }: productTableProps) => {
             </TableHeader>
             <TableBody>
               {productData.map((product) => {
-                return <TableRows key={product.id} product={product} />;
+                return <TableRows key={product.name} product={product} />;
               })}
             </TableBody>
           </Table>

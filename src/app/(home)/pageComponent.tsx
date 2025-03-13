@@ -1,11 +1,13 @@
 "use client";
 import { fetchProductCategoryById } from "@/app/action/products/dbOperation";
 import React, { useEffect, useState } from "react";
-import PageProductDetailComponent from "./menu/components/PageProductDetailComponent";
 import {  TproductSchema } from "@/lib/types/productType";
 import { useSearchParams } from "next/navigation";
 import { UseSiteContext } from "@/SiteContext/SiteContext";
-
+import PageProductDetailComponent from "./componets/PageProductDetailComponent";
+//import { auth } from "@/auth";
+//import { useSession } from "next-auth/react"
+//import AuthButton from "../AuthButton.client";
 //import { TnewProductSchema } from '@/lib/types';
 // import {  TnewProductSchema } from '@/lib/type/productType';
 
@@ -33,12 +35,14 @@ if(id ===undefined || id === null){
     }
     fetchproductData();
   }, [id]);
-
+  
+ // const { data: session } = useSession()
   return (
     <div className="overflow-hidden min-h-screen">
       <div className="container mx-auto pt-7 p-1">
         <div className="w-full flex flex-col md:flex-row flex-wrap gap-3">
-        
+          {/* <AuthButton /> */}
+       
           {products.map((product, i) => {
             return <PageProductDetailComponent key={i} product={product} />;
           })}

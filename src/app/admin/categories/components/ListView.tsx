@@ -1,9 +1,9 @@
 "use client";
 
-type productTableProps = {
-  limit?: number;
-  title?: string;
-};
+// type productTableProps = {
+//   limit?: number;
+//   title?: string;
+// };
 
 import React, { useEffect, useState } from "react";
 import {
@@ -21,7 +21,7 @@ import { fetchCategories } from "@/app/action/category/dbOperations";
 import { categoryType } from "@/lib/types/categoryType";
 //import FeaturProductUpdate from "./FeaturProductUpdate";
 
-const ListView = ({ title }: productTableProps) => {
+const ListView = () => {
   const [categoryData, setCategoryData] = useState<categoryType[]>([]);
   // var pageNo = 1;
   // var limit = 10
@@ -46,7 +46,7 @@ const ListView = ({ title }: productTableProps) => {
     <>
       <div className="mt-10 p-2">
         <h3 className="text-2xl mb-4 font-semibold">
-          {title ? title : "Category"}
+          Category
         </h3>
         <div className="bg-slate-50 rounded-lg p-1">
           <Table>
@@ -62,7 +62,8 @@ const ListView = ({ title }: productTableProps) => {
                 {/* <TableHead>Category</TableHead> */}
                 {/* <TableHead>Status</TableHead> */}
                 <TableHead>Desc</TableHead>
-                <TableHead>Active</TableHead>
+                <TableHead>Related Service</TableHead>
+              
                 <TableHead className="hidden md:table-cell">Action</TableHead>
               </TableRow>
             </TableHeader>
