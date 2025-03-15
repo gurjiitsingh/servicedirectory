@@ -26,7 +26,7 @@ export type ProductType = {
   price: string;
   quantity:number;
   productDesc: string;
-  productCat: string;
+  categoryId: string;
   image: string;
   isFeatured: boolean;
   flavors:string;
@@ -52,7 +52,7 @@ const productSchema = z.object({
     .string()
    // .refine((value) => /^\d+$/.test(value), "Invalid product price"), // Refinement
     .refine((value) =>/[.,\d]+/.test(value), "Invalid Sr no."),
-  //productCat: z.string().min(1, { message: "Please select category" }),
+  productCat: z.string().optional(),
   categoryId:z.string().min(1, { message: "Please select category" }),
   productDesc: z
     .string()
@@ -122,7 +122,8 @@ export const editPorductSchema = z.object({
     .string()
     .refine((value) =>/[.,\d]+/.test(value), "Invalid product price"),
    // .refine((value) => /^\d+$/.test(value), "Invalid product price"), // Refinement
-  productCat: z.string().min(1, { message: "Please select category" }),
+  //productCat: z.string().min(1, { message: "Please select category" }),
+  categoryId:z.string().min(1, { message: "Please select category" }),
   productDesc: z
     .string()
     .min(2, { message: "Product description is required" }),
@@ -162,4 +163,17 @@ export type TProduct = {
   image?: any;
   baseProductId?: string | undefined;
   oldImgageUrl?: string | undefined;
+}
+
+
+export type productType = {
+  name: string;
+  price: string;
+  categoryId: string;
+  productDesc: string;
+  id?: string | undefined;
+  isFeatured?: boolean | undefined;
+  image?: any;
+  baseProductId?: string | undefined;
+  flavors?: boolean | undefined;
 }

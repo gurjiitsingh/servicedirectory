@@ -48,7 +48,7 @@ const Form = () => {
       formData.append("image", data.image[0]);
    const result = await addNewCategory(formData);
 
-   console.log("cat add ------------", result)
+  // console.log("cat add ------------", result)
       
       setValue('name', "");
       setValue('productDesc', "");
@@ -116,7 +116,7 @@ const Form = () => {
         )}
       </div>
 
-      <Button className="bg-slate-100 "  type="submit">Add </Button>
+      <Button className="bg-red-600 text-white font-semibold"  type="submit">Add </Button>
     </div>
   </form>
  </div>

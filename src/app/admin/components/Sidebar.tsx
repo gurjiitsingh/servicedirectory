@@ -28,13 +28,13 @@ const menuList = [
     icon: <GoHome />,
   },
  
-  // {
-  //   name: "Services",
-  //   link: "/admin/productsbase",
-  //   icon: <MdOutlineProductionQuantityLimits />,
-  // },
   {
-    name: "Categories/Services",
+    name: "Services",
+    link: "/admin/productsbase",
+    icon: <MdOutlineProductionQuantityLimits />,
+  },
+  {
+    name: "Categories",
     link: "/admin/categories",
     icon: <MdSpaceDashboard />,
   },

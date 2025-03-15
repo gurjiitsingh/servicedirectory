@@ -1,10 +1,5 @@
 "use client";
 
-type productTableProps = {
-  limit?: number;
-  title?: string;
-};
-
 import React, { useEffect, useState } from "react";
 import {
   Table,
@@ -20,7 +15,7 @@ import TableRows from "./TableRows";
 
 
 import {  TproductSchema } from "@/lib/types/productType";
-import { fetchProductCategoryById } from "@/app/action/products/dbOperation";
+import { fetchProductByCategoryId } from "@/app/action/productsbase/dbOperation";
 import { useSearchParams } from "next/navigation";
 import { categoryType } from "@/lib/types/categoryType";
 import { fetchCategories } from "@/app/action/category/dbOperations";
@@ -28,39 +23,48 @@ import CategoryComp from "./CategoryComp";
 
 //import FeaturProductUpdate from "./FeaturProductUpdate";
 
-const ListView = ({ title }: productTableProps) => {
+const ListView = () => {
 
 const useSearch = useSearchParams();
 const id = useSearch.get("id") as string;
+//console.log("from  search pramas--------------", id)
+
   const [productData, setProductData] = useState<TproductSchema[]>([]);
   const [categoryData, setCategoryData] = useState<categoryType[]>([]);
-  const [cateId, setCateId ] = useState<string>(id);
+  const [cateId, setCateId ] = useState<string>('');
+  const [usecateId, setuseCateId ] = useState<string>('');
   // var pageNo = 1;
   // var limit = 10
+  if(id!== null){
+   // setuseCateId(id)
+   // fetchServiceHandler(id)
+  }
 
-  // useEffect(() => {
-   
-  //   async function fetchcate() {
-  //     try {
-      
-  //     const categories = await fetchCategories()
-  //       console.log("---------", categories)
-  //       setCategoryData(categories);
-       
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   fetchcate();
+  function fetchServiceHandler(id:string){
+    setCateId(id)
+  }
+
+  useEffect(() => {
+    async function fetchcate() {
+      try {      
+      const categories = await fetchCategories()
+     //   console.log("---------", categories)
+        setCategoryData(categories);
+       } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchcate();
     
-  // }, []);
+  }, []);
 
  
   useEffect(() => {
+   // console.log("cat id from -------", cateId)
     async function fetchProduct() {
       try {
-        const result = await fetchProductCategoryById(cateId);
-        console.log("---------", result)
+        const result = await fetchProductByCategoryId(cateId);
+       // console.log("---------", result)
         setProductData(result);
       } catch (error) {
         console.log(error);
@@ -69,23 +73,35 @@ const id = useSearch.get("id") as string;
     fetchProduct();
     
   }, [ cateId]);  
+  // useEffect(() => {
+  //   // console.log("cat id from -------", cateId)
+  //    async function fetchProduct() {
+  //      try {
+  //        const result = await fetchProductByCategoryId(id);
+  //       // console.log("---------", result)
+  //        setProductData(result);
+  //      } catch (error) {
+  //        console.log(error);
+  //      }
+  //    }
+  //    fetchProduct();
+     
+  //  }, [ ]);
   
    
-console.log("useSearch id ----", cateId)
- 
-
+//console.log("useSearch id ----", cateId)
   return (
     <>
       <div className="mt-10 p-2">
-      {/* <h3 className="text-xl mb-4 font-semibold">
+      <h3 className="text-xl mb-4 font-semibold">
        Select Service
         </h3>
         <div className="flex gap-3">
 {categoryData.map((cate)=>{
-  return <CategoryComp name={cate.name} id={cate.id} key={cate.name} />
+  return <CategoryComp name={cate.name} id={cate.id} key={cate.name} fetchServiceHandler={fetchServiceHandler} />
 })}
           
-        </div> */}
+        </div>
         <h3 className="text-2xl mb-4 font-semibold">
         Services
         </h3>
@@ -111,7 +127,7 @@ console.log("useSearch id ----", cateId)
             </TableHeader>
             <TableBody>
               {productData.map((product) => {
-                return <TableRows key={product.name} product={product} />;
+                return <TableRows key={product.id} product={product} />;
               })}
             </TableBody>
           </Table>

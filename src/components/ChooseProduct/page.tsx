@@ -6,7 +6,7 @@ import { ProductType } from "@/lib/types/productType";
 import Productvariant from "./components/productvariant";
 import { fetchProductById } from "@/app/action/productsbase/dbOperation";
 //import { ButtonAddToCartButton } from "@/components/CartPageComponent/ButtonAddToCart";
-import { fetchProductSauces } from "@/app/action/productsauces/dbOperation";
+
 //import Productsauces from "./components/productsauces";
 import { UseSiteContext } from "@/SiteContext/SiteContext";
 import { IoClose } from "react-icons/io5";

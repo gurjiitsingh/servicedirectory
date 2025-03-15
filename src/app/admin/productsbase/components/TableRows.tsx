@@ -17,23 +17,31 @@ import { MdDeleteForever } from "react-icons/md";
 import Image from "next/image";
 import Link from "next/link";
 import { CiEdit } from "react-icons/ci";
-import { deleteProduct } from "@/app/action/products/dbOperation";
-import { ProductType } from "@/lib/types/productType";
+import { deleteProduct } from "@/app/action/productsbase/dbOperation";
+import {  TproductSchema } from "@/lib/types/productType";
+import { useRouter } from "next/navigation";
 //import { deleteProduct } from "@/app/action/products/dbOperation";
 //import { useRouter  } from "next/navigation";
-function TableRows({ product }:{product:ProductType}){
+function TableRows({ product }:{product:TproductSchema}){
 
-//const router = useRouter();
+const router = useRouter();
 
- async function handleDelete(product:ProductType) {
-   console.log(product.id);
+ async function handleDelete(product:TproductSchema) {
+  // console.log("product to be deleted id",product.categoryId);
   const result = await deleteProduct(product.id!, product.image)
 if(result.errors){
   alert(result.errors)
 }else{
   // router.push('/admin/products')
    //   router.refresh()
-      location.reload()
+   
+    //  location.reload()
+//    pathname: "/admin/products/editform",
+//  query: {
+//   id: product.id,
+//  },
+router.push(`/admin/productsbase?id=${product.categoryId}`);
+
 }
 
   }

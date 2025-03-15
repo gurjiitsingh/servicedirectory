@@ -5,15 +5,17 @@ import React, { useEffect } from "react";
 //import Description from "./componets/Description";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { editPorductSchema, TeditProductSchema } from "@/lib/types/productType";
+import {  TeditProductSchema } from "@/lib/types/productType";
 //import { Images } from "lucide-react";
 // import { fetchCategories } from "@/app/action/category/dbOperations";
 //import { fetchbrands } from "@/app/action/brads/dbOperations";
-import {
-  editProduct,
-  fetchProductById,
-} from "@/app/action/products/dbOperation";
+// import {
+//   editProduct,
+//   fetchProductById,
+// } from "@/app/action/products/dbOperation";
 import { useRouter, useSearchParams } from "next/navigation";
+import { editProduct, fetchProductById } from "@/app/action/productsbase/dbOperation";
+import { editPorductSchema } from "@/lib/types";
 // import { categoryTypeArr } from "@/lib/types/categoryType";
 
 // type Terror = {
@@ -32,7 +34,7 @@ const PageComp = () => {
 
   const searchParams = useSearchParams();
   const id = searchParams.get("id") || "";
-  // console.log("this is product edit---------------",id)
+   console.log("this is product edit---------------",id)
 
   //const [categories, setCategory] = useState<categoryTypeArr>([]);
   //const [product, setProduct] = useState({});
@@ -43,25 +45,26 @@ const PageComp = () => {
     setValue,
     handleSubmit,
     // setError,
-  } = useForm<TeditProductSchema>({
+  } =  useForm<TeditProductSchema>({
     resolver: zodResolver(editPorductSchema),
   });
+  
   useEffect(() => {
     let productData;
     async function prefetch() {
-      productData = await fetchProductById(id);
-      console.log("productData.id ----", id);
+     // productData = await fetchProductById(id);
+     productData = await fetchProductById(id);
       //setProduct(productData);
      // const catData = await fetchCategories();
       //  console.log("----------------- product data in edit", catData);
      // setCategory(catData);
       setValue("id", id);
-      setValue("name", productData[0].name);
-      setValue("productDesc", productData[0].productDesc);
-      setValue("oldImgageUrl", productData[0].image);
-      setValue("price", productData[0].price);
-      //setValue("productCat", productData[0].productCat);
-      setValue("isFeatured", productData[0].isFeatured);
+      setValue("name", productData.name);
+      setValue("productDesc", productData.productDesc);
+      setValue("oldImgageUrl", productData.image);
+      setValue("price", productData.price);
+      setValue("categoryId", productData.categoryId!);
+      setValue("isFeatured", productData.isFeatured);
     }
 
     prefetch();
@@ -69,10 +72,11 @@ const PageComp = () => {
 
   async function onsubmit(data: TeditProductSchema) {
     const formData = new FormData();
+    console.log("in edit ---------",data)
 
     formData.append("name", data.name);
     formData.append("price", data.price);
-    formData.append("productCat", data.productCat);
+    formData.append("categoryId", data.categoryId);
     formData.append("productDesc", data.productDesc);
     formData.append("image", data.image[0]);
     formData.append("oldImgageUrl", data.oldImgageUrl!);
@@ -158,7 +162,7 @@ const PageComp = () => {
                       )}
                     </span>
                   </div>
-                  <input {...register("productCat", {value:"all"})}  hidden />
+                  <input {...register("categoryId")}  hidden />
                   {/* <div className="flex flex-col gap-1 w-full">
                     <label className="label-style" htmlFor="product-title">
                       Category<span className="text-red-500">*</span>{" "}
@@ -269,7 +273,7 @@ const PageComp = () => {
                 </div>
 
                 <Button className="bg-red-500" type="submit">
-                  Edit Product{" "}
+                  Edit Product
                 </Button>
               </div>
             </div>

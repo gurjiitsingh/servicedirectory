@@ -18,7 +18,7 @@ export default function SideBarBase() {
   return (
     <div className="">
 
-      <div className="hidden lg:block">
+      <div className="hidden md:block">
         <Sidebar />
       </div>
 

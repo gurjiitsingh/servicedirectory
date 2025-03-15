@@ -9,7 +9,7 @@ export default async function AuthButton() {
     session.user = {
       name: session.user.name,
       email: session.user.email,
-      role: session.user.role,
+       role: session.user.role,
     };
   }
 

@@ -1,6 +1,6 @@
 import Header from "@/components/Home/Header";
 //import { useEffect, useState } from "react";
-import { fetchProductById } from "@/app/action/products/dbOperation";
+import { fetchProductById } from "@/app/action/productsbase/dbOperation";
 //import Link from "next/link";
 
 export default async function Home() {

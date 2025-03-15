@@ -31,7 +31,7 @@ const ListView = () => {
       try {
       
       const categories = await fetchCategories()
-        console.log("---------", categories)
+       // console.log("---------", categories)
         setCategoryData(categories);
       } catch (error) {
         console.log(error);
@@ -44,9 +44,9 @@ const ListView = () => {
  
   return (
     <>
-      <div className="mt-10 p-2">
+      <div className="mt-2">
         <h3 className="text-2xl mb-4 font-semibold">
-          Category
+          Categories
         </h3>
         <div className="bg-slate-50 rounded-lg p-1">
           <Table>

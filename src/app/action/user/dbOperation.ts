@@ -10,7 +10,7 @@ type getuserType = {
   password:string;
 }
 
-export async function getUser(email: string,password:string): Promise<getuserType> {
+export async function getUser(email: string,password:string): Promise<userType> {
   console.log(password)
   const q = query(collection(db, "address"), where("email", "==", email));
   const querySnapshot = await getDocs(q);

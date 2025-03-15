@@ -1,11 +1,11 @@
 "use client";
-import { fetchProducts } from "@/app/action/products/dbOperation";
+import { fetchProducts } from "@/app/action/productsbase/dbOperation";
 import React, { useEffect, useState } from "react";
 import PageProductDetailComponent from "./components/PageProductDetailComponent";
 //import Hero from "@/components/Hero";
 //import { ProductType } from "@/lib/types/ProductTypeype";
 import Footer from "@/components/Home/Footer";
-import { ProductType, TnewProductSchema } from "@/lib/types/productType";
+import {  TnewProductSchema } from "@/lib/types/productType";
 
 //import { TnewProductSchema } from '@/lib/types';
 // import {  TnewProductSchema } from '@/lib/type/productType';

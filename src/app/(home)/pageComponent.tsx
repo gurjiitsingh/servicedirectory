@@ -1,5 +1,5 @@
 "use client";
-import { fetchProductCategoryById } from "@/app/action/products/dbOperation";
+import { fetchProductByCategoryId } from "@/app/action/productsbase/dbOperation";
 import React, { useEffect, useState } from "react";
 import {  TproductSchema } from "@/lib/types/productType";
 import { useSearchParams } from "next/navigation";
@@ -28,8 +28,8 @@ if(id ===undefined || id === null){
 //console.log("id-----",id)
     async function fetchproductData() {
      
-      const productData = await fetchProductCategoryById(id);
-     // console.log("service list",productData);
+      const productData = await fetchProductByCategoryId(id);
+      console.log("service list",productData);
 
      setProduct(productData);
     }

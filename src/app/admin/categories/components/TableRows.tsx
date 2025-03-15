@@ -16,14 +16,14 @@ import { MdDeleteForever } from "react-icons/md";
 import Image from "next/image";
 import Link from "next/link";
 import { CiEdit } from "react-icons/ci";
-import { deleteProduct } from "@/app/action/products/dbOperation";
 import { categoryType } from "@/lib/types/categoryType";
+import { deleteCategory } from "@/app/action/category/dbOperations";
 function TableRows({ category }: { category: categoryType }) {
   //const router = useRouter();
 
   async function handleDelete(category: categoryType) {
-    console.log(category.id);
-    const result = await deleteProduct(category.id!, category.image!);
+    //console.log("-------------------",category.id);
+    const result = await deleteCategory(category.id!, category.image!);
     if (result.errors) {
       alert(result.errors);
     } else {

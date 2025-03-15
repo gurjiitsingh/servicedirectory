@@ -2,9 +2,9 @@
 import { categorySchema, editCategorySchema } from '@/lib/types/categoryType';
 import { db } from "@/lib/firebaseConfig";
 import { deleteImage, upload } from "@/lib/cloudinary";
-import { addDoc, collection, doc, getDoc, getDocs, setDoc } from "@firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, setDoc } from "@firebase/firestore";
 import { categoryType } from '@/lib/types/categoryType';
-import { editPorductSchema } from '@/lib/types';
+
 
 //type TcategorySchemaArray = TcategorySchema[]
 
@@ -26,7 +26,38 @@ export const fetchCategories = async ():Promise<categoryType[]> => {
 }
 
 
+export async function deleteCategory(id:string, oldImgageUrl:string) {
 
+ const docRef = doc(db, "category", id);
+   await deleteDoc(docRef);                     
+   //return { errors: "Delete not implimented jet" };
+   // if (result?.rowCount === 1) {
+
+    const imageUrlArray = oldImgageUrl.split("/");
+    console.log(imageUrlArray[imageUrlArray.length - 1]);
+    const imageName =
+      imageUrlArray[imageUrlArray.length - 2] +
+      "/" +
+      imageUrlArray[imageUrlArray.length - 1];
+
+    const image_public_id = imageName.split(".")[0];
+    console.log(image_public_id);
+    try {
+      const deleteResult = await deleteImage(image_public_id);
+      console.log("image delete data", deleteResult);
+    } catch (error) {
+      console.log(error);
+      return {errors:"Somthing went wrong, can not delete product picture"}
+    }
+
+       return {
+      message: { sucess: "Deleted product" },
+    };
+  // }else{
+  //   return {errors:"Somthing went wrong, can not delete product"}
+  // }
+
+}
 
 export async function addNewCategory(formData: FormData) {
   const recievedData = {

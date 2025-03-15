@@ -1,4 +1,4 @@
-import  SignIn  from "./SignInForm"
+import { SignIn } from "./SignInForm"
 
 const login = () => {
   return (<div className="max-w-xl mx-auto my-[5%]">

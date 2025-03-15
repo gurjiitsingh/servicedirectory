@@ -2,6 +2,9 @@
 import {
   newPorductSchema,
   editPorductSchema,
+  TnewProductSchema,
+  TproductSchema,
+  productType,
 
 } from "@/lib/types/productType";
 
@@ -15,11 +18,15 @@ import { db } from "@/lib/firebaseConfig";
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
   
+  query,
+  
   setDoc,
+  where,
 } from "@firebase/firestore"; //doc, getDoc,
 
 import {
@@ -111,15 +118,43 @@ const priceValue = formData.get("price") as string;
 
 
 
+
 type rt = {
   errors:string;
 }
 
-export async function deleteProduct(id: string, oldImgageUrl: string):Promise<rt> {
+export async function deleteProduct(id:string, oldImgageUrl:string) {
 
-console.log("out put ", id, oldImgageUrl)
-  return {"errors":"Delete not implimented jet"};
-}
+  const docRef = doc(db, "product", id);
+    await deleteDoc(docRef);                     
+    //return { errors: "Delete not implimented jet" };
+    // if (result?.rowCount === 1) {
+ 
+     const imageUrlArray = oldImgageUrl.split("/");
+     console.log(imageUrlArray[imageUrlArray.length - 1]);
+     const imageName =
+       imageUrlArray[imageUrlArray.length - 2] +
+       "/" +
+       imageUrlArray[imageUrlArray.length - 1];
+ 
+     const image_public_id = imageName.split(".")[0];
+     console.log(image_public_id);
+     try {
+       const deleteResult = await deleteImage(image_public_id);
+       console.log("image delete data", deleteResult);
+     } catch (error) {
+       console.log(error);
+       return {errors:"Somthing went wrong, can not delete product picture"}
+     }
+ 
+        return {
+       message: { sucess: "Deleted product" },
+     };
+   // }else{
+   //   return {errors:"Somthing went wrong, can not delete product"}
+   // }
+ 
+ }
 
 // export async function deleteProduct(id:string, oldImgageUrl:string) {
 
@@ -163,11 +198,12 @@ export async function editProduct(formData: FormData) {
   const receivedData = {
     name: formData.get("name"),
     price: formData.get("price"),
-    productCat: formData.get("productCat"),
+    categoryId: formData.get("categoryId"),
     productDesc: formData.get("productDesc"),
     image: formData.get("image"),
     isFeatured: featured_img,
   };
+  console.log("==========",image)
 
   const result = editPorductSchema.safeParse(receivedData);
 
@@ -216,15 +252,18 @@ export async function editProduct(formData: FormData) {
     }
   }
   
+ 
   const productUpdtedData = {
     name: formData.get("name"),
-    price: formData.get("price"),
-    productCat: formData.get("productCat"),
+    price:formData.get("price"),
+    flavors: false,
+    categoryId: formData.get("categoryId"),
     productDesc: formData.get("productDesc"),
     image: imageUrl,
     isFeatured: featured_img,
   };
-  //console.log("update data ------------", productUpdtedData)
+
+  console.log("update data ------------", productUpdtedData)
   // update database
   try {
     const docRef = doc(db,"product", id);
@@ -236,7 +275,7 @@ export async function editProduct(formData: FormData) {
   }
 }
 
-export async function fetchProducts(): Promise<ProductType[]> {
+export async function fetchProducts(): Promise<TnewProductSchema[]> {
   // const result = await getDocs(collection(db, "product"))
   // let data = [];
   // result.forEach((doc) => {
@@ -245,14 +284,34 @@ export async function fetchProducts(): Promise<ProductType[]> {
   //  return data;
 
   const result = await getDocs(collection(db, "product"));
-  const data = [] as ProductType[];
+  const data = [] as TnewProductSchema[];
   result.forEach((doc) => {
-    const pData = { id: doc.id, ...doc.data() } as ProductType;
+    const pData = { id: doc.id, ...doc.data() } as TnewProductSchema;
     data.push(pData);
   });
   return data;
 
 }
+export async function fetchProductByCategoryId(id: string): Promise<productType[]> {
+  // console.log("this is sauce action-------------",id)
+  const q = query(collection(db, "product"), where("categoryId", "==", id));
+    const querySnapshot = await getDocs(q);
+  
+    const data = [] as productType[];
+    querySnapshot.forEach((doc) => {
+     // const datas = doc.data() as TproductSchema;
+     
+        const pData = { id: doc.id, ...doc.data() } as productType;
+          data.push(pData);
+     // data.push(datas);
+    });
+    //console.log("-----------", data);
+    return data;
+ 
+ 
+ }
+
+
 
 export async function fetchProductById(id: string): Promise<ProductType> {
   

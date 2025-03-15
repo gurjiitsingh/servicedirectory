@@ -17,7 +17,7 @@ import Link from 'next/link'
 
 const LinkDropdown = () => {
   const session = useSession();
-
+console.log("role-------",session?.data?.user?.role)
   return (
     <DropdownMenu>
   <DropdownMenuTrigger>
